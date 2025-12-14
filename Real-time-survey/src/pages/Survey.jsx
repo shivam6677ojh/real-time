@@ -30,9 +30,12 @@ export default function SurveyPage() {
 
   return (
     <section className="survey">
-      <h2>Submit Field Survey</h2>
-      {!token && <p style={{ color: '#eab308' }}>Login to submit observations.</p>}
-      <form className="survey-form" onSubmit={submit}>
+      <div className="centered">
+        <div className="card-narrow">
+          <div className="panel">
+            <h2>Submit Field Survey</h2>
+            {!token && <p style={{ color: '#eab308' }}>Login to submit observations.</p>}
+            <form className="survey-form" onSubmit={submit}>
         <label>
           Water Body
           <select value={form.body} onChange={(e) => setForm({ ...form, body: e.target.value })}>
@@ -52,8 +55,11 @@ export default function SurveyPage() {
           </select>
         </label>
         <button className="btn" type="submit" disabled={!token}>Submit</button>
-      </form>
-      {!!message && <p>{message}</p>}
+            </form>
+            {!!message && <p>{message}</p>}
+          </div>
+        </div>
+      </div>
     </section>
   )
 }
