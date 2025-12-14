@@ -10,7 +10,6 @@ export default function Header() {
         <NavLink to="/" end>Dashboard</NavLink>
         <NavLink to="/map">Map</NavLink>
         <NavLink to="/survey">Survey</NavLink>
-        {user?.role === 'admin' && <NavLink to="/admin">Admin</NavLink>}
         {user ? (
           <button className="btn" onClick={logout}>Logout</button>
         ) : (

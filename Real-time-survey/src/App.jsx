@@ -2,6 +2,7 @@ import './App.css'
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import { AuthProvider } from './auth/AuthContext'
 import Header from './components/Header'
+import Footer from './components/Footer'
 import Dashboard from './pages/Dashboard'
 import MapPage from './pages/Map'
 import SurveyPage from './pages/Survey'
@@ -23,11 +24,7 @@ export default function App() {
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignupPage />} />
           </Routes>
-          <footer className="footer">
-            <div>Advantages: Low cost, real-time visualization concept, scalable to IoT.</div>
-            <div>Limitations: Simulated data, no physical sensors, limited parameters.</div>
-            <div>Future Scope: IoT sensors, cloud database, AI-based prediction.</div>
-          </footer>
+          <Footer />
         </div>
       </BrowserRouter>
     </AuthProvider>

@@ -10,17 +10,39 @@ dotenv.config()
 const app = express()
 const PORT = process.env.PORT || 4000
 const ORIGIN = process.env.ORIGIN || 'http://localhost:5173'
-const MONGODB_URI = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/survey_demo'
+const ORIGIN_ALT = process.env.ORIGIN_ALT || 'http://localhost:5174'
+// Flexible CORS: allow common dev ports and env overrides
+const allowedOrigins = [ORIGIN, ORIGIN_ALT, 'http://localhost:5173', 'http://localhost:5174'].filter(Boolean)
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true) // allow non-browser clients
+    if (allowedOrigins.includes(origin)) return callback(null, true)
+    return callback(new Error('Not allowed by CORS: ' + origin))
+  },
+  methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization'],
+}))
+const MONGODB_URI = process.env.MONGODB_URI
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me'
 
 app.use(cors({ origin: ORIGIN }))
 app.use(express.json())
 
 // Mongo connection
+mongoose.set('strictQuery', true)
+let mongoReady = false
 mongoose.connect(MONGODB_URI, { dbName: 'survey_demo' }).then(() => {
+  mongoReady = true
   console.log('MongoDB connected')
 }).catch((e) => {
+  mongoReady = false
   console.error('MongoDB connection error:', e.message)
+})
+
+// Gate requests if Mongo is not ready (prevents long buffering timeouts)
+app.use((req, res, next) => {
+  if (!mongoReady) return res.status(503).json({ error: 'Service unavailable: database not connected' })
+  next()
 })
 
 // Schemas / Models
