@@ -13,7 +13,7 @@ const ORIGIN = process.env.ORIGIN || 'http://localhost:5173'
 const ORIGIN_ALT = process.env.ORIGIN_ALT || 'http://localhost:5174'
 // Flexible CORS: allow common dev ports and env overrides
 const allowedOrigins = [ORIGIN, ORIGIN_ALT, 'http://localhost:5173', 'http://localhost:5174'].filter(Boolean)
-app.use(cors({
+const corsOptions = {
   origin: (origin, callback) => {
     if (!origin) return callback(null, true) // allow non-browser clients
     if (allowedOrigins.includes(origin)) return callback(null, true)
@@ -21,7 +21,9 @@ app.use(cors({
   },
   methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization'],
-}))
+}
+app.use(cors(corsOptions))
+app.options('*', cors(corsOptions))
 const MONGODB_URI = process.env.MONGODB_URI
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me'
 
@@ -30,7 +32,6 @@ app.get('/', (req, res) => {
   res.send('Real-time Water Quality Monitoring Backend is running.')
 })
 
-app.use(cors({ origin: ORIGIN }))
 app.use(express.json())
 
 // Mongo connection
