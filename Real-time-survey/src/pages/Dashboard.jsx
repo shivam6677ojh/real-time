@@ -17,10 +17,12 @@ export default function Dashboard() {
   const currentStatus = statusFor(current)
 
   return (
-    <section className="top">
-      <MapView bodies={WATER_BODIES} readings={readings} onSelect={setSelected} />
-      <div>
+    <section>
+      <div className="top">
+        <MapView bodies={WATER_BODIES} readings={readings} onSelect={setSelected} />
         <StatsPanel bodies={WATER_BODIES} selected={selected} onSelect={setSelected} current={current} status={currentStatus} />
+      </div>
+      <div className="charts">
         <ChartsPanel history={current.history} />
       </div>
     </section>
