@@ -15,13 +15,17 @@ export default function Header() {
         <NavLink to="/survey" className="nav-link">Survey</NavLink>
           <NavLink to="/observations" className="nav-link">Observations</NavLink>
           {user ? (
-            <button className="btn btn-small" onClick={logout}>Logout</button>
+            <div className="userbox">
+              <div className="avatar" aria-hidden>{(user.name || user.email || 'U').slice(0,1).toUpperCase()}</div>
+              <span className="username">{user.name || user.email}</span>
+              <button className="btn btn-small" onClick={logout}>Logout</button>
+            </div>
           ) : (
-          <>
-            <NavLink to="/login" className="nav-link">Login</NavLink>
-            <NavLink to="/signup" className="nav-link">Signup</NavLink>
-          </>
-        )}
+            <>
+              <NavLink to="/login" className="nav-link">Login</NavLink>
+              <NavLink to="/signup" className="nav-link">Signup</NavLink>
+            </>
+          )}
       </nav>
     </header>
   )
