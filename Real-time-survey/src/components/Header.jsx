@@ -13,9 +13,10 @@ export default function Header() {
         <NavLink to="/" end className="nav-link">Dashboard</NavLink>
         <NavLink to="/map" className="nav-link">Map</NavLink>
         <NavLink to="/survey" className="nav-link">Survey</NavLink>
-        {user ? (
-          <button className="btn btn-small" onClick={logout}>Logout</button>
-        ) : (
+          <NavLink to="/observations" className="nav-link">Observations</NavLink>
+          {user ? (
+            <button className="btn btn-small" onClick={logout}>Logout</button>
+          ) : (
           <>
             <NavLink to="/login" className="nav-link">Login</NavLink>
             <NavLink to="/signup" className="nav-link">Signup</NavLink>

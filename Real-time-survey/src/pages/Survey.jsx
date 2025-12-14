@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react'
 import { WATER_BODIES } from '../data'
+import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../auth/AuthContext'
 import { api } from '../api/client'
 
 export default function SurveyPage() {
   const { token } = useAuth()
+  const navigate = useNavigate()
   const [form, setForm] = useState({ body: WATER_BODIES[0].id, observation: '', pollution: 'Low' })
   const [message, setMessage] = useState('')
 
@@ -18,8 +20,9 @@ export default function SurveyPage() {
         token,
         body: { bodyId: form.body, bodyName, observation: form.observation, pollution: form.pollution },
       })
-      setMessage('Submitted!')
+      setMessage('Submitted! Redirecting to observations...')
       setForm((f) => ({ ...f, observation: '' }))
+      setTimeout(() => navigate('/observations'), 600)
     } catch (err) {
       setMessage(err.message)
     }
