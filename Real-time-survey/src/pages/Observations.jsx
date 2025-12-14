@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react'
 import { api } from '../api/client'
+import { useAuth } from '../auth/AuthContext'
 
 export default function Observations() {
+  const { token } = useAuth()
   const [items, setItems] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState('')
@@ -9,7 +11,7 @@ export default function Observations() {
   useEffect(() => {
     const run = async () => {
       try {
-        const res = await api.get('/api/submissions')
+        const res = await api('/api/submissions', { token })
         setItems(res)
       } catch (e) {
         setError(e.message || 'Failed to load submissions')
