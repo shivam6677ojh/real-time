@@ -25,6 +25,11 @@ app.use(cors({
 const MONGODB_URI = process.env.MONGODB_URI
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_change_me'
 
+
+app.get('/', (req, res) => {
+  res.send('Real-time Water Quality Monitoring Backend is running.')
+})
+
 app.use(cors({ origin: ORIGIN }))
 app.use(express.json())
 
