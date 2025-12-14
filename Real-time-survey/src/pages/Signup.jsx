@@ -27,9 +27,9 @@ export default function SignupPage() {
     <section>
       <h2>Signup</h2>
       <form className="survey-form" onSubmit={submit}>
-        <label>Name<input value={name} onChange={(e) => setName(e.target.value)} /></label>
-        <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-        <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+        <label>Name<input value={name} onChange={(e) => setName(e.target.value)} autoComplete="name" /></label>
+        <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" /></label>
+        <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="new-password" /></label>
         <button className="btn" type="submit">Create account</button>
       </form>
       {error && <p style={{ color: '#ef4444' }}>{error}</p>}
