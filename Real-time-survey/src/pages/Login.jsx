@@ -19,15 +19,21 @@ export default function LoginPage() {
       navigate('/')
     } catch (e) {
       setError(e.message)
-            <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+    }
   }
 
   return (
-            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+    <section>
       <h2>Login</h2>
       <form className="survey-form" onSubmit={submit}>
-        <label>Email<input type="email" value={email} onChange={(e) => setEmail(e.target.value)} /></label>
-        <label>Password<input type="password" value={password} onChange={(e) => setPassword(e.target.value)} /></label>
+        <label>
+          Email
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} autoComplete="email" />
+        </label>
+        <label>
+          Password
+          <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} autoComplete="current-password" />
+        </label>
         <button className="btn" type="submit">Login</button>
       </form>
       {error && <p style={{ color: '#ef4444' }}>{error}</p>}
