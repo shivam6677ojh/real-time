@@ -12,7 +12,7 @@ export default function MapPage() {
   }, [])
 
   return (
-    <section className="top">
+    <section className="top single">
       <MapView bodies={WATER_BODIES} readings={readings} onSelect={setSelected} />
     </section>
   )

@@ -23,6 +23,8 @@ body { margin: 0; background: radial-gradient(1200px 600px at 20% 0%, #0b1221 0%
 .subtitle { color: var(--muted); font-size: 0.95rem; }
 
 .top { display: grid; grid-template-columns: 1.25fr 1fr; gap: 22px; margin-top: 16px; margin-bottom: 18px; }
+/* Single-column variant for pages that only show the map */
+.top.single { grid-template-columns: 1fr; }
 .map { height: 470px; background: #0f172a; border: 1px solid var(--border); border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.35); }
 .panel { backdrop-filter: blur(10px); background: var(--panel); border: 1px solid var(--border); border-radius: 16px; padding: 16px; display: flex; flex-direction: column; gap: 14px; box-shadow: 0 10px 30px rgba(0,0,0,0.25); overflow: hidden; position: relative; }
 .panel > form { background: transparent !important; border: 0 !important; box-shadow: none !important; padding: 0; margin: 0; width: 100%; }
@@ -86,6 +88,7 @@ body { margin: 0; background: radial-gradient(1200px 600px at 20% 0%, #0b1221 0%
   grid-template-columns: repeat(3, 1fr);
   gap: 16px;
   text-align: left;
+  margin-left: 20px;
 }
 .footer-grid h4 {
   margin: 0 0 6px;
